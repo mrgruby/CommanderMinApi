@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CommanderMinApi.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,9 @@ namespace CommanderMinApi.Persistence
         {
             
         }
+
+        public DbSet<Platform> Platforms => Set<Platform>();
+
+        public DbSet<CommandLine> CommandLines => Set<CommandLine>();
     }
 }

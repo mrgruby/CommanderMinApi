@@ -17,9 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Contracts\" />
     <Folder Include="Exceptions\" />
-    <Folder Include="Features\Commands\CommandLine\" />
     <Folder Include="Features\Commands\Platform\" />
     <Folder Include="Features\Queries\CommandLine\" />
     <Folder Include="Features\Queries\Platform\" />
