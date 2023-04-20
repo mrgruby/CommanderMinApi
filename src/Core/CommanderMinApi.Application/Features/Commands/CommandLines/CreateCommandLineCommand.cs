@@ -10,5 +10,5 @@ using System.Threading.Tasks;
 
 namespace CommanderMinApi.Application.Features.Commands.CommandLines
 {
-    public record CreateCommandLineCommand(CreateCommandLineRequestModel commandLine) : IRequest<ServiceResponse<CommandLineResponseDTO>>;
+    public record CreateCommandLineCommand(Guid platformId, CreateCommandLineRequestModel commandLine) : IRequest<ServiceResponse<CommandLineResponseDTO>>;
 }

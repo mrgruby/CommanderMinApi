@@ -1,4 +1,4 @@
-﻿using CommanderMinApi.Application.Contracts;
+﻿using CommanderMinApi.Application.Contracts.Persistence;
 using CommanderMinApi.Application.ResponseModels;
 using CommanderMinApi.Application.ServiceResponses;
 using CommanderMinApi.Application.Validators;
@@ -44,10 +44,10 @@ namespace CommanderMinApi.Application.Features.Commands.CommandLines
                 var commandLine = request.commandLine.Adapt<CommandLine>();
 
                 //Add to database. SaveChanges is called in the Add method.
-                _repo.Add(commandLine);
+                _repo.Add(commandLine, request.platformId);
 
                 //Map from the CommandLine Entity to a CreateCommandLineDto, which is added to the response return model.
-                //response.Data = _mapper.Map<CreateCommandLineDto>(commandLine);
+                response.Data = commandLine.Adapt<CommandLineResponseDTO>();
             }
 
             return response;

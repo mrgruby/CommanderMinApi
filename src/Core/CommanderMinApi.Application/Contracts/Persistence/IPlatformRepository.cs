@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CommanderMinApi.Application.Contracts
+namespace CommanderMinApi.Application.Contracts.Persistence
 {
-    public interface IPlatformRepository : IGenericRepository<Platform>
+    public interface IPlatformRepository : IGenericRepository<Platform, Guid>
     {
         Task<IEnumerable<Platform>> GetPlatformsWithCommands();
 
