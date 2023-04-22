@@ -1,4 +1,5 @@
 ﻿using CommanderMinApi.Application.Contracts.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,41 +9,57 @@ using System.Threading.Tasks;
 
 namespace CommanderMinApi.Persistence.Repositories
 {
-    public class GenericRepository<T, T2> : IGenericRepository<T, T2> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        public void Add(T entity, T2 id)
+        protected readonly CommanderMinApiDbContext _context;
+
+        public GenericRepository(CommanderMinApiDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+        public void Add(T entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+
+            _context.Set<T>().AddAsync(entity);
+            _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<T>> All()
+        public void Update(T entity)
         {
-            throw new NotImplementedException();
+            _context.Entry(entity).State = EntityState.Modified;
+            _context.SaveChangesAsync();
         }
 
         public void Delete(T entity)
         {
-            throw new NotImplementedException();
+            _context.Set<T>().Remove(entity);
+            _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<T>> Find(Expression<Func<T, bool>> predicate)
+        public async Task<IEnumerable<T>> All()
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().ToListAsync();
         }
 
-        public Task<T> Get(T2 id)
+        public async Task<IEnumerable<T>> Find(Expression<Func<T, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>()
+                .AsQueryable()
+                .Where(predicate).ToListAsync();
         }
 
-        public Task<IReadOnlyList<T>> GetPagedReponse(int page, int size)
+        public async Task<T> Get(Guid id)
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().FindAsync(id);
         }
 
-        public void Update(T entity, T2 id)
+        public async Task<IReadOnlyList<T>> GetPagedReponse(int page, int size)
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().Skip((page - 1) * size).Take(size).AsNoTracking().ToListAsync();
         }
     }
 }

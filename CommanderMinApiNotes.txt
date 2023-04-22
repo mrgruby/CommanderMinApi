@@ -1,0 +1,24 @@
+dotnet user-secrets init --project D:\VSProjects\CommanderMinApi\src\Infrastructure\CommanderMinApi.Persistence
+
+
+PM command for setting up user secrets: (or use powershell and cd into the project dir)
+
+ddotnet user-secrets init --project D:\VSProjects\CommanderMinApi\src\Infrastructure\CommanderMinApi.Persistence
+
+This creates a unique id for the user secrets, which can be seen in the project file (csproj)
+
+To create a user secret for the user-id and password for the database:
+dotnet user-secrets set "UserId" "gruby" --project D:\VSProjects\CommanderMinApi\src\Infrastructure\CommanderMinApi.Persistence
+dotnet user-secrets set "Password" "pa55w0rd!" --project D:\VSProjects\CommanderMinApi\src\Infrastructure\CommanderMinApi.Persistence
+
+Then in Program.cs, we can build the connectionstring using these values. 
+That way, we won't have any vital info in the connString in pure text in app.config
+
+
+Running ef migrations commands like dotnet ef database update may cause this error:
+A connection was successfully established with the server, but then an error occurred during the login process.
+In this case, this was a certificate trust issue.
+
+Adding TrustServerCertificate=true to the connString fixed this...
+
+

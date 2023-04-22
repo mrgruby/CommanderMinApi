@@ -44,7 +44,8 @@ namespace CommanderMinApi.Application.Features.Commands.CommandLines
                 var commandLine = request.commandLine.Adapt<CommandLine>();
 
                 //Add to database. SaveChanges is called in the Add method.
-                _repo.Add(commandLine, request.platformId);
+                commandLine.PlatformId = request.platformId;
+                _repo.Add(commandLine);
 
                 //Map from the CommandLine Entity to a CreateCommandLineDto, which is added to the response return model.
                 response.Data = commandLine.Adapt<CommandLineResponseDTO>();

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CommanderMinApi.Application.Contracts.Persistence
 {
-    public interface IPlatformRepository : IGenericRepository<Platform, Guid>
+    public interface IPlatformRepository : IGenericRepository<Platform>
     {
         Task<IEnumerable<Platform>> GetPlatformsWithCommands();
 

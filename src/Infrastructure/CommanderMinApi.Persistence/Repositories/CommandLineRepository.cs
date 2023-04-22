@@ -1,5 +1,6 @@
 ﻿using CommanderMinApi.Application.Contracts.Persistence;
 using CommanderMinApi.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +10,20 @@ using System.Threading.Tasks;
 
 namespace CommanderMinApi.Persistence.Repositories
 {
-    public class CommandLineRepository : GenericRepository<CommandLine, Guid>, ICommandLineRepository
+    public class CommandLineRepository : GenericRepository<CommandLine>, ICommandLineRepository
     {
-        Task<CommandLine> ICommandLineRepository.GetCommandLineByPlatform(Guid platformId, Guid commandLineId)
+        public CommandLineRepository(CommanderMinApiDbContext context) : base(context)
         {
-            throw new NotImplementedException();
+
+        }
+        public async Task<CommandLine> GetCommandLineByPlatform(Guid platformId, Guid commandLineId)
+        {
+            return await _context.CommandLines.Where(c => c.PlatformId == platformId && c.CommandLineId == commandLineId).FirstOrDefaultAsync();
         }
 
-        Task<IEnumerable<CommandLine>> ICommandLineRepository.GetCommandLineListByPlatform(Guid platformId)
+        public async Task<IEnumerable<CommandLine>> GetCommandLineListByPlatform(Guid platformId)
         {
-            throw new NotImplementedException();
+            return await _context.CommandLines.Where(c => c.PlatformId == platformId).ToListAsync();
         }
     }
 }

@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace CommanderMinApi.Application.Contracts.Persistence
 {
-    public interface IGenericRepository<T, T2> where T : class
+    public interface IGenericRepository<T> where T : class
     {
-        void Add(T entity, T2 id);
-        void Update(T entity, T2 id);
+        void Add(T entity);
+        void Update(T entity);
         void Delete(T entity);
-        Task<T> Get(T2 id);
+        Task<T> Get(Guid id);
         Task<IEnumerable<T>> All();
         Task<IEnumerable<T>> Find(Expression<Func<T, bool>> predicate);
         Task<IReadOnlyList<T>> GetPagedReponse(int page, int size);

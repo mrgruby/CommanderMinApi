@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CommanderMinApi.Application.Contracts.Persistence
 {
-    public interface ICommandLineRepository : IGenericRepository<CommandLine, Guid>
+    public interface ICommandLineRepository : IGenericRepository<CommandLine>
     {
         Task<IEnumerable<CommandLine>> GetCommandLineListByPlatform(Guid platformId);
         Task<CommandLine> GetCommandLineByPlatform(Guid platformId, Guid commandLineId);

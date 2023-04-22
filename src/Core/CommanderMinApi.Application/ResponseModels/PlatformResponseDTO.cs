@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace CommanderMinApi.Application.ResponseModels
 {
-    public record PlatformResponseDTO(Guid platformId, string platformName, string platformImageUrl, string promptPlatformDescription);
+    public record PlatformResponseDTO(Guid platformId, string platformName, string platformImageUrl, string PlatformDescription);
 }
