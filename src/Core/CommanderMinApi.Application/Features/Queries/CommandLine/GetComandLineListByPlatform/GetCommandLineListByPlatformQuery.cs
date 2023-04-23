@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CommanderMinApi.Application.Features.Queries.CommandLine
+namespace CommanderMinApi.Application.Features.Queries.CommandLine.GetComandLineListByPlatform
 {
     public class GetCommandLineListByPlatformQuery : IRequest<ServiceResponse<List<CommandLineResponseDTO>>>
     {
