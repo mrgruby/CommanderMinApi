@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace CommanderMinApi.Persistence.Repositories
 {
-    public class PlatformRepository : GenericRepository<Platform>, IPlatformRepository
+    public class PlatformRepository : GenericRepository<PlatformEntity>, IPlatformRepository
     {
         public PlatformRepository(CommanderMinApiDbContext context) : base(context)
         {
             
         }
-        public async Task<Platform> GetPlatformByIdWithCommands(Guid platformId)
+        public async Task<PlatformEntity> GetPlatformByIdWithCommands(Guid platformId)
         {
             var platform = await _context.Platforms.Where(p => p.PlatformId == platformId).Include(c => c.CommandLineList).FirstOrDefaultAsync();
             if (platformId == Guid.Empty)
@@ -26,7 +26,7 @@ namespace CommanderMinApi.Persistence.Repositories
             return platform;
         }
 
-        public async Task<IEnumerable<Platform>> GetPlatformsWithCommands()
+        public async Task<IEnumerable<PlatformEntity>> GetPlatformsWithCommands()
         {
             return await _context.Platforms.ToListAsync();
         }

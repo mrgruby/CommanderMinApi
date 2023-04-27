@@ -20,5 +20,3 @@ A connection was successfully established with the server, but then an error occ
 In this case, this was a certificate trust issue.
 
 Adding TrustServerCertificate=true to the connString fixed this...
-
-

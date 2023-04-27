@@ -8,7 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CommanderMinApi.Application.Features.Commands.CommandLines
+namespace CommanderMinApi.Application.Features.Commands.CommandLines.UpdateCommandLine
 {
-    public record CreateCommandLineCommand(Guid platformId, CreateCommandLineRequestModel commandLine) : IRequest<ServiceResponse<CommandLineResponseDTO>>;
+    public record UpdateCommandLineCommand(Guid platformId,Guid commandLineId, UpdateCommandLineRequestModel commandLineUpdateModel) : IRequest<ServiceResponse<CommandLineResponseDTO>>
+    {
+    }
 }

@@ -14,6 +14,7 @@ namespace CommanderMinApi.Application
         {
             var assembly = typeof(RegisterApplicationServices).Assembly;
 
+            services.AddAutoMapper(assembly);
             services.AddMediatR(configuration => configuration.RegisterServicesFromAssemblies(assembly));
 
             services.AddValidatorsFromAssembly(assembly);

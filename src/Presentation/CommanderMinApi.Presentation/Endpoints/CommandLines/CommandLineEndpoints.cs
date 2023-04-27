@@ -1,8 +1,11 @@
 ﻿using Carter;
-using CommanderMinApi.Application.Features.Commands.CommandLines;
+using CommanderMinApi.Application.Features.Commands.CommandLines.CreateCommandLine;
+using CommanderMinApi.Application.Features.Commands.CommandLines.DeleteCommandLine;
+using CommanderMinApi.Application.Features.Commands.CommandLines.UpdateCommandLine;
 using CommanderMinApi.Application.Features.Queries.CommandLine.GetComandLineListByPlatform;
 using CommanderMinApi.Application.Features.Queries.CommandLine.GetCommandLineByPlatform;
 using CommanderMinApi.Application.RequestModels.CommandLines;
+using CommanderMinApi.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -23,7 +26,7 @@ namespace CommanderMinApi.Presentation.Endpoints.CommandLines
     public class CommandLineEndpoints : CarterModule
     {
         //This creates a base route for all endpoins, like the Route attribute in regular controllers.
-        public CommandLineEndpoints() : base ("/api/commandlines/{platformId}/commands")
+        public CommandLineEndpoints() : base ("/api/platform/{platformId}/commands")
         {
             
         }
@@ -63,9 +66,35 @@ namespace CommanderMinApi.Presentation.Endpoints.CommandLines
 
                 if (returnModel.Success)
                     //Return the newly created ressource, along with a link to it.
-                    return Results.CreatedAtRoute("getCommandLineByPlatform", new { platformId = platformId, commandLineId = returnModel.Data.CommandLineId }, returnModel);
+                    return Results.CreatedAtRoute("getCommandLineByPlatform", new { platformId, commandLineId = returnModel.Data.CommandLineId }, returnModel);
                 else
                     return Results.BadRequest($"Failed to save new CommandLine - {string.Join(", ", returnModel.ValidationErrors)}");
+            });
+
+            app.MapPut("/{commandLineId}", async (IMediator mediator, Guid platformId, Guid commandLineId, UpdateCommandLineRequestModel commandLineUpdateModel) =>
+            {
+                var command = new UpdateCommandLineCommand(platformId, commandLineId, commandLineUpdateModel);
+                var response = await mediator.Send(command);
+
+                if (response.Success == false && response.Message == "Notfound")
+                    return Results.NotFound($"CommandLine to update, with Id {commandLineId}, was not found!");
+                if (response.Success == false && response.ValidationErrors.Count > 0)
+                    return Results.BadRequest($"Failed to update CommandLine - {string.Join(", ", response.ValidationErrors)}");
+
+                return Results.NoContent();
+            });
+
+            app.MapDelete("/{commandLineId}", async (IMediator mediator, Guid platformId, Guid commandLineId) =>
+            {
+                var command = new DeleteCommandLineCommand(commandLineId, platformId);
+                var response = await mediator.Send(command);
+
+                if (!response.Success)
+                {
+                    return Results.NotFound(response.Message);
+                }
+
+                return Results.NoContent();
             });
         }
     }

@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Endpoints\Platforms\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Core\CommanderMinApi.Application\CommanderMinApi.Application.csproj" />
   </ItemGroup>
 

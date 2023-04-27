@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CommanderMinApi.Application.Features.Commands.CommandLines
+namespace CommanderMinApi.Application.Features.Commands.CommandLines.CreateCommandLine
 {
     public class CreateCommandLineCommandHandler : IRequestHandler<CreateCommandLineCommand, ServiceResponse<CommandLineResponseDTO>>
     {
@@ -41,7 +41,7 @@ namespace CommanderMinApi.Application.Features.Commands.CommandLines
             if (response.Success)
             {
                 //Map from the CommandLine request model to a CommandLine Entity, in order to add it to the database.
-                var commandLine = request.commandLine.Adapt<CommandLine>();
+                var commandLine = request.commandLine.Adapt<CommandLineEntity>();
 
                 //Add to database. SaveChanges is called in the Add method.
                 commandLine.PlatformId = request.platformId;

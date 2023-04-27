@@ -4,6 +4,7 @@ using CommanderMinApi.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CommanderMinApi.Persistence.Migrations
 {
     [DbContext(typeof(CommanderMinApiDbContext))]
-    partial class CommanderMinApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230427230659_changed_entity_names")]
+    partial class changed_entity_names
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

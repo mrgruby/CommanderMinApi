@@ -10,18 +10,18 @@ using System.Threading.Tasks;
 
 namespace CommanderMinApi.Persistence.Repositories
 {
-    public class CommandLineRepository : GenericRepository<CommandLine>, ICommandLineRepository
+    public class CommandLineRepository : GenericRepository<CommandLineEntity>, ICommandLineRepository
     {
         public CommandLineRepository(CommanderMinApiDbContext context) : base(context)
         {
 
         }
-        public async Task<CommandLine> GetCommandLineByPlatform(Guid platformId, Guid commandLineId)
+        public async Task<CommandLineEntity> GetCommandLineByPlatform(Guid platformId, Guid commandLineId)
         {
             return await _context.CommandLines.Where(c => c.PlatformId == platformId && c.CommandLineId == commandLineId).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<CommandLine>> GetCommandLineListByPlatform(Guid platformId)
+        public async Task<IEnumerable<CommandLineEntity>> GetCommandLineListByPlatform(Guid platformId)
         {
             return await _context.CommandLines.Where(c => c.PlatformId == platformId).ToListAsync();
         }
