@@ -25,7 +25,7 @@ namespace CommanderMinApi.Application.Features.Commands.Platforms.DeletePlatform
         public async Task<ServiceResponse<PlatformResponseDTO>> Handle(DeletePlatformCommand request, CancellationToken cancellationToken)
         {
             var response = new ServiceResponse<PlatformResponseDTO>();
-            var platformToDelete = await _repo.Get(request.platformId);
+            var platformToDelete = await _repo.GetPlatformByIdWithCommands(request.platformId);
             if (platformToDelete == null)
             {
                 response.Success = false;

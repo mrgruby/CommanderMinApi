@@ -1,4 +1,5 @@
-﻿using CommanderMinApi.Application.Contracts.Persistence;
+﻿using AutoMapper;
+using CommanderMinApi.Application.Contracts.Persistence;
 using CommanderMinApi.Application.ResponseModels;
 using CommanderMinApi.Application.ServiceResponses;
 using CommanderMinApi.Application.Validators.CommandLines;
@@ -15,10 +16,12 @@ namespace CommanderMinApi.Application.Features.Commands.CommandLines.CreateComma
 {
     public class CreateCommandLineCommandHandler : IRequestHandler<CreateCommandLineCommand, ServiceResponse<CommandLineResponseDTO>>
     {
+        private readonly IMapper _mapper;
         private readonly ICommandLineRepository _repo;
 
-        public CreateCommandLineCommandHandler(ICommandLineRepository repo)
+        public CreateCommandLineCommandHandler(IMapper mapper, ICommandLineRepository repo)
         {
+            _mapper = mapper;
             _repo = repo;
         }
 
@@ -41,7 +44,8 @@ namespace CommanderMinApi.Application.Features.Commands.CommandLines.CreateComma
             if (response.Success)
             {
                 //Map from the CommandLine request model to a CommandLine Entity, in order to add it to the database.
-                var commandLine = request.commandLine.Adapt<CommandLineEntity>();
+                var commandLine = _mapper.Map<CommandLineEntity>(request.commandLine);
+                //var commandLine = request.commandLine.Adapt<CommandLineEntity>();
 
                 //Add to database. SaveChanges is called in the Add method.
                 commandLine.PlatformId = request.platformId;
