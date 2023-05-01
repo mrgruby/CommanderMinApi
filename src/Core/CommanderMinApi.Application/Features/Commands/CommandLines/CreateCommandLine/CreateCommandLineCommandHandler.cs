@@ -1,7 +1,7 @@
 ﻿using CommanderMinApi.Application.Contracts.Persistence;
 using CommanderMinApi.Application.ResponseModels;
 using CommanderMinApi.Application.ServiceResponses;
-using CommanderMinApi.Application.Validators;
+using CommanderMinApi.Application.Validators.CommandLines;
 using CommanderMinApi.Domain.Entities;
 using Mapster;
 using MediatR;

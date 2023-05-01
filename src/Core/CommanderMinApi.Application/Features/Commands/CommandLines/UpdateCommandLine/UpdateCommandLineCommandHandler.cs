@@ -2,7 +2,7 @@
 using CommanderMinApi.Application.Contracts.Persistence;
 using CommanderMinApi.Application.ResponseModels;
 using CommanderMinApi.Application.ServiceResponses;
-using CommanderMinApi.Application.Validators;
+using CommanderMinApi.Application.Validators.CommandLines;
 using CommanderMinApi.Domain.Entities;
 using Mapster;
 using MediatR;
@@ -55,6 +55,8 @@ namespace CommanderMinApi.Application.Features.Commands.CommandLines.UpdateComma
             }
             if (response.Success)
             {
+                //This mapping changes the entity into a modified state, and this is tracked by the context,
+                //so the actual update happens when calling Save on the context.
                 _mapper.Map(request.commandLineUpdateModel, commandLineFromDbToUpdate);
                 _repo.Update(commandLineFromDbToUpdate);
             }

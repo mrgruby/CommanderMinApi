@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CommanderMinApi.Application.Validators
+namespace CommanderMinApi.Application.Validators.CommandLines
 {
     public class CreateCommandLineValidator : AbstractValidator<CreateCommandLineRequestModel>
     {
