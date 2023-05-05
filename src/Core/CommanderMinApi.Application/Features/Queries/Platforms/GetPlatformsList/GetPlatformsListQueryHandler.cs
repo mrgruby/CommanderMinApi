@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CommanderMinApi.Application.Features.Queries.Platforms.GetPlatformsList
 {
-    public class GetPlatformsListQueryHandler : IRequestHandler<GetPlatformsListQuery, ServiceResponse<PlatformResponseDTO>>
+    public class GetPlatformsListQueryHandler : IRequestHandler<GetPlatformsListQuery, ServiceResponse<List<PlatformResponseDTO>>>
     {
         private readonly IMapper _mapper;
         private readonly IPlatformRepository _repo;
@@ -21,9 +21,21 @@ namespace CommanderMinApi.Application.Features.Queries.Platforms.GetPlatformsLis
             _mapper = mapper;
             _repo = repo;
         }
-        public Task<ServiceResponse<PlatformResponseDTO>> Handle(GetPlatformsListQuery request, CancellationToken cancellationToken)
+        public async Task<ServiceResponse<List<PlatformResponseDTO>>> Handle(GetPlatformsListQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var response = new ServiceResponse<List<PlatformResponseDTO>>();
+            var platformsFromDb = await _repo.GetPlatformsWithCommands();
+
+            if (platformsFromDb == null)
+            {
+                response.Success = false;
+                response.Message = "No platforms were found!";
+            }
+            if (response.Success)
+            {
+                response.Data = _mapper.Map<List<PlatformResponseDTO>>(platformsFromDb);
+            }
+            return response;
         }
     }
 }

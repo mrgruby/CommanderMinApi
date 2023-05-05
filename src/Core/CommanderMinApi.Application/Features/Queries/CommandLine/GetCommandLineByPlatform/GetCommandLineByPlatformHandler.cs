@@ -20,7 +20,7 @@ namespace CommanderMinApi.Application.Features.Queries.CommandLine.GetCommandLin
         {
             _repo = repo;
         }
-        public async Task<ServiceResponse<CommandLineResponseDTO>> Handle(GetCommandLineByPlatformQuery request, Exception exception, RequestExceptionHandlerState<ServiceResponse<CommandLineResponseDTO>> state, CancellationToken cancellationToken)
+        public async Task<ServiceResponse<CommandLineResponseDTO>> Handle(GetCommandLineByPlatformQuery request, CancellationToken cancellationToken)
         {
             var response = new ServiceResponse<CommandLineResponseDTO>();
 
@@ -35,11 +35,6 @@ namespace CommanderMinApi.Application.Features.Queries.CommandLine.GetCommandLin
             response.Data = commandLineFromDb.Adapt<CommandLineResponseDTO>();
 
             return response;
-        }
-
-        public Task<ServiceResponse<CommandLineResponseDTO>> Handle(GetCommandLineByPlatformQuery request, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
         }
     }
 }

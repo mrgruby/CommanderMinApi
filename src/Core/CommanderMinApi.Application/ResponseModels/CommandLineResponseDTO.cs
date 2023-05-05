@@ -9,10 +9,10 @@ namespace CommanderMinApi.Application.ResponseModels
     public record CommandLineResponseDTO
     (
         Guid CommandLineId,
-        string howTo,
-        string line,
-        string platformName,
+        string HowTo,
+        string CommandLine,
+        string PlatformName,
         string Comment,
-        Guid platformId
+        Guid PlatformId
     );
 }

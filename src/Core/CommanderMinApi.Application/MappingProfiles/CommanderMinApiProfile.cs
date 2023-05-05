@@ -23,6 +23,9 @@ namespace CommanderMinApi.Application.MappingProfiles
 
             CreateMap<CommandLineEntity, CommandLineResponseDTO>().ReverseMap();
             CreateMap<PlatformEntity, PlatformResponseDTO>().ReverseMap();
+
+            //CreateMap<CommandLineEntity, PlatformResponseDTO>().ReverseMap();
+            //CreateMap<List<PlatformResponseDTO>, List<PlatformEntity>>().ReverseMap();
         }
     }
 }

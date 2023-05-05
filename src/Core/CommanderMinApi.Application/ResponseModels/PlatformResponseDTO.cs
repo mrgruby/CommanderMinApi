@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace CommanderMinApi.Application.ResponseModels
 {
     public record PlatformResponseDTO(
-        Guid platformId, 
-        string platformName, 
-        string platformImageUrl, 
+        Guid PlatformId, 
+        string PlatformName, 
+        string PlatformImageUrl, 
         string PlatformDescription, 
         ICollection<CommandLineResponseDTO>? CommandLineList);
 }

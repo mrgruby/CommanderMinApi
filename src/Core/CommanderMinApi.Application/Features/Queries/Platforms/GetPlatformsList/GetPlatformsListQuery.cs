@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CommanderMinApi.Application.Features.Queries.Platforms.GetPlatformsList
 {
-    public record GetPlatformsListQuery : IRequest<ServiceResponse<PlatformResponseDTO>>
+    public record GetPlatformsListQuery : IRequest<ServiceResponse<List<PlatformResponseDTO>>>
     {
     }
 }

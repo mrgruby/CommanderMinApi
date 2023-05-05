@@ -28,7 +28,7 @@ namespace CommanderMinApi.Persistence.Repositories
 
         public async Task<IEnumerable<PlatformEntity>> GetPlatformsWithCommands()
         {
-            return await _context.Platforms.ToListAsync();
+            return await _context.Platforms.Include(x => x.CommandLineList).ToListAsync();
         }
     }
 }
