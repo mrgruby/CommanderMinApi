@@ -20,7 +20,7 @@ namespace CommanderMinApi.Persistence.Repositories
         public async Task<List<CommandLineEntity>> FindCommandLinesBySearchText(string searchText)
         {
             return await _context.CommandLines
-                .Where(c => c.CommandLine.Contains(searchText) || c.Comment.Contains(searchText) || c.HowTo.Contains(searchText)).ToListAsync();
+                .Where(c => c.Comment.Contains(searchText) || c.HowTo.Contains(searchText)).ToListAsync();
         }
 
         public async Task<CommandLineEntity> GetCommandLineByPlatform(Guid platformId, Guid commandLineId)

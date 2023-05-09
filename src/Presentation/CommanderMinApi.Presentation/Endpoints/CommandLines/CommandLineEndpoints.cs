@@ -62,7 +62,22 @@ namespace CommanderMinApi.Presentation.Endpoints.CommandLines
                 return Results.Ok(getCommandLineListBysearchTextReturnModel);
             });
 
-            app.MapGet("/{commandLineId}", async (IMediator mediator, Guid platformId, Guid commandLineId) =>
+            //Get CommandLine search suggestions
+            app.MapGet("/{searchText}", async (IMediator mediator, string searchText) =>
+            {
+                var query = new GetCommandLineSearchSuggestionsQuery(searchText);//Uses a record
+
+                var getCommandLineSearchSuggestionsReturnModel = await mediator.Send(query);
+
+                if (getCommandLineSearchSuggestionsReturnModel.Data == null)
+                {
+                    return Results.BadRequest();
+                }
+
+                return Results.Ok(getCommandLineSearchSuggestionsReturnModel);
+            }).WithName("GetCommandLineSearchSuggestions");
+
+            app.MapGet("/{commandLineId:guid}", async (IMediator mediator, Guid platformId, Guid commandLineId) =>
             {
                 var query = new GetCommandLineByPlatformQuery { PlatformId = platformId, CommandLineId = commandLineId };
 
