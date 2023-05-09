@@ -11,5 +11,6 @@ namespace CommanderMinApi.Application.Contracts.Persistence
     {
         Task<IEnumerable<CommandLineEntity>> GetCommandLineListByPlatform(Guid platformId);
         Task<CommandLineEntity> GetCommandLineByPlatform(Guid platformId, Guid commandLineId);
+        Task<List<CommandLineEntity>> FindCommandLinesBySearchText(string searchText);
     }
 }

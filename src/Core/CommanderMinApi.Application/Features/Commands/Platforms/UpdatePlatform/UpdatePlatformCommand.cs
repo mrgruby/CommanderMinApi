@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CommanderMinApi.Application.Features.Commands.Platforms.UpdatePlatform
 {
-    public record UpdatePlatformCommand(Guid platformId, UpdatePlatformRequestModel platformRequestModel) : IRequest<ServiceResponse<PlatformResponseDTO>>
+    public record UpdatePlatformCommand(Guid PlatformId, UpdatePlatformRequestModel PlatformRequestModel) : IRequest<ServiceResponse<PlatformResponseDTO>>
     {
     }
 }

@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace CommanderMinApi.Application.RequestModels.Platforms
 {
-    public record CreatePlatformRequestModel(string platformName, string platformImageUrl);
+    public record CreatePlatformRequestModel(string PlatformName, string PlatformImageUrl, string PlatformDescription);
 }

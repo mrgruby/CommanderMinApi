@@ -12,11 +12,11 @@ namespace CommanderMinApi.Application.Validators.Platforms
     {
         public UpdatePlatformValidator()
         {
-            RuleFor(p => p.platformName)
+            RuleFor(p => p.PlatformName)
                 .NotEmpty().WithMessage("{PropertyName} is required.")
                 .NotNull();
 
-            RuleFor(p => p.platformImageUrl)
+            RuleFor(p => p.PlatformImageUrl)
                 .NotEmpty().WithMessage("{PropertyName} is required.")
                 .NotNull();
         }

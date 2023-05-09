@@ -4,6 +4,7 @@ using CommanderMinApi.Application.Features.Commands.CommandLines.DeleteCommandLi
 using CommanderMinApi.Application.Features.Commands.CommandLines.UpdateCommandLine;
 using CommanderMinApi.Application.Features.Queries.CommandLine.GetComandLineListByPlatform;
 using CommanderMinApi.Application.Features.Queries.CommandLine.GetCommandLineByPlatform;
+using CommanderMinApi.Application.Features.Queries.CommandLine.GetCommandLineSearchSuggestions;
 using CommanderMinApi.Application.RequestModels.CommandLines;
 using CommanderMinApi.Domain.Entities;
 using MediatR;
@@ -44,6 +45,21 @@ namespace CommanderMinApi.Presentation.Endpoints.CommandLines
                 }
 
                 return Results.Ok(getCommandLineListByPlatformReturnModel);
+            });
+
+            //Get CommandLines by search text.
+            app.MapGet("/{page}/{searchText}", async (IMediator mediator, string searchText, int page) =>
+            {
+                var query = new GetCommandLineSearchQuery { CurrentPage = page, SearchText = searchText };
+
+                var getCommandLineListBysearchTextReturnModel = await mediator.Send(query);
+
+                if (getCommandLineListBysearchTextReturnModel.Data == null)
+                {
+                    return Results.BadRequest();
+                }
+
+                return Results.Ok(getCommandLineListBysearchTextReturnModel);
             });
 
             app.MapGet("/{commandLineId}", async (IMediator mediator, Guid platformId, Guid commandLineId) =>

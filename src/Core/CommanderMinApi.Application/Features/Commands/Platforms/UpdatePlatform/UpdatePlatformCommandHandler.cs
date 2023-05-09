@@ -26,8 +26,8 @@ namespace CommanderMinApi.Application.Features.Commands.Platforms.UpdatePlatform
         {
             var response = new ServiceResponse<PlatformResponseDTO>();
             var validator = new UpdatePlatformValidator();
-            var platformFromDb = await _repo.Get(request.platformId);
-            var validationResult = await validator.ValidateAsync(request.platformRequestModel);
+            var platformFromDb = await _repo.Get(request.PlatformId);
+            var validationResult = await validator.ValidateAsync(request.PlatformRequestModel);
             if (platformFromDb == null)
             {
                 response.Success = false;
@@ -44,7 +44,7 @@ namespace CommanderMinApi.Application.Features.Commands.Platforms.UpdatePlatform
             }
             if (response.Success && platformFromDb != null)
             {
-                _mapper.Map(request.platformRequestModel, platformFromDb);
+                _mapper.Map(request.PlatformRequestModel, platformFromDb);
                 _repo.Update(platformFromDb);
             }
             
