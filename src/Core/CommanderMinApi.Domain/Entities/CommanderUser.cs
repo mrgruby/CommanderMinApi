@@ -8,7 +8,7 @@ namespace CommanderMinApi.Domain.Entities
 {
     public class CommanderUser
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string UserName { get; set; } = string.Empty;
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }

@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\CommanderMinApi.Application\CommanderMinApi.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\CommanderMinApi.Authentication\CommanderMinApi.Authentication.csproj" />
     <ProjectReference Include="..\..\Infrastructure\CommanderMinApi.Persistence\CommanderMinApi.Persistence.csproj" />
     <ProjectReference Include="..\CommanderMinApi.Presentation\CommanderMinApi.Presentation.csproj" />
   </ItemGroup>

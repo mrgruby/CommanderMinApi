@@ -2,6 +2,7 @@ using CommanderMinApi.Presentation;
 using CommanderMinApi.Application;
 using CommanderMinApi.Persistence;
 using Carter;
+using CommanderMinApi.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +15,8 @@ builder.Services.AddCarter();
 
 builder.Services.AddPresentationServices()
     .AddPersistenceServices(builder.Configuration)
-    .AddApplicationServices();
+    .AddApplicationServices()
+    .AddAuthenticationServices(builder.Configuration);
 
 var app = builder.Build();
 
