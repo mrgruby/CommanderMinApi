@@ -84,6 +84,11 @@ namespace CommanderMinApi.Presentation.Endpoints.Platforms
 
                 return Results.NoContent();
             });
+
+            app.MapPost("/upload-image", async (IMediator mediator, IFormFile file) =>
+            {
+                
+            });
         }
 
 

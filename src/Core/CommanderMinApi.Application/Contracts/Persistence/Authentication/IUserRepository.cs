@@ -1,10 +1,4 @@
-﻿using CommanderMinApi.Application.ServiceResponses;
-using CommanderMinApi.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommanderMinApi.Domain.Entities;
 
 namespace CommanderMinApi.Application.Contracts.Persistence.Authentication
 {
@@ -12,7 +6,6 @@ namespace CommanderMinApi.Application.Contracts.Persistence.Authentication
     {
         Task<CommanderUser>GetCommanderUser(string username);
         void AddUser(CommanderUser user);
-
         void Update(CommanderUser user);
     }
 }

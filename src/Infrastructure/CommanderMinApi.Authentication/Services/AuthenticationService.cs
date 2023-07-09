@@ -58,7 +58,7 @@ namespace CommanderMinApi.Authentication.Services
                 response.Message = "User already exists!";
                 response.Success = false;
             }
-            
+
             var passwordHash = CreatePasswordHash(registerRequest.Password);
             var newUser = new CommanderUser
             {
@@ -89,14 +89,15 @@ namespace CommanderMinApi.Authentication.Services
             }
             var passwordHash = CreatePasswordHash(changePasswordRequest.NewPassword);
 
-            user.PasswordHash = passwordHash.passwordHash;
-            user.PasswordSalt = passwordHash.passwordSalt;
-
-            _userRepo.Update(user);
-            response.Message = "Password successfullly changed!";
-            response.Data = user.Id;
+            if (user != null)
+            {
+                user.PasswordHash = passwordHash.passwordHash;
+                user.PasswordSalt = passwordHash.passwordSalt;
+                _userRepo.Update(user);
+                response.Message = "Password successfullly changed!";
+                response.Data = user.Id;
+            }
             return response;
-
         }
 
         /// <summary>
