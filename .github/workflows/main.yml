@@ -3,7 +3,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actiona/checkout@v3
+      - uses: actions/checkout@v3
       
       - name: setup .NET
         uses: actions/setup-dotnet@v3
@@ -17,4 +17,4 @@ jobs:
         run: dotnet build ./CommanderMinApi.sln --configuration Release --no-restore
         
       - name: Publish
-        run: dotnet pubish ./CommanderMinApi.sln --configuration Release --no-build
+        run: dotnet publish ./CommanderMinApi.sln --configuration Release --no-build
