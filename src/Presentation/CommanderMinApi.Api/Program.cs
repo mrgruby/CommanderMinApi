@@ -6,6 +6,7 @@ using CommanderMinApi.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//Test
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
