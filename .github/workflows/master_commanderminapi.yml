@@ -49,7 +49,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: .net-app
-          path: upload-artifact
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -58,4 +57,4 @@ jobs:
           app-name: 'CommanderMinApi'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F01C2BD4DF06449BB8DEC5EF0793E3CE }}
-          package: upload-artifact
+          package: ./myapp
