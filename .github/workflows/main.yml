@@ -23,7 +23,7 @@ jobs:
         with:
           dotnet-version: '7.0.x'
           
-      - name: Install dependencies
+      - name: Restore
         run: |
           cd ${{ env.SOURCE_PATH }}
           dotnet restore                
