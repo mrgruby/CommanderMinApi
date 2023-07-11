@@ -57,4 +57,4 @@ jobs:
           app-name: 'CommanderMinApi'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F01C2BD4DF06449BB8DEC5EF0793E3CE }}
-          package: ./src/Presentation/CommanderMinApi.Api
+          package: .
