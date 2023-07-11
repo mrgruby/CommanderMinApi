@@ -29,13 +29,13 @@ jobs:
         run: dotnet build ./src/Presentation/CommanderMinApi.Api --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish ./src/Presentation/CommanderMinApi.Api -c Release -o ./myapp
+        run: dotnet publish ./src/Presentation/CommanderMinApi.Api -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: .net-app
-          path: ./myapp
+          path: ${{env.DOTNET_ROOT}}/myapp
 
   deploy:
     runs-on: ubuntu-latest
@@ -57,4 +57,4 @@ jobs:
           app-name: 'CommanderMinApi'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F01C2BD4DF06449BB8DEC5EF0793E3CE }}
-          package: ./myapp
+          package: ./src/Presentation/CommanderMinApi.Api
