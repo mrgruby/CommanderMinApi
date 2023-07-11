@@ -1,7 +1,15 @@
+name: publish
+
 on:
+  workflow_dispatch:
   push:
     branches:
-    - '*'
+    - master
+    
+env:
+  AZURE_WEBAPP_NAME: CommanderMinApi
+  AZURE_WEBAPP_PACKAGE_PATH: "./publish"
+  SOURCE_PATH: './src/Presentation/CommanderMinApi.Api/CommanderMinApi.Api
 
 jobs:
   publish:
@@ -16,10 +24,18 @@ jobs:
           dotnet-version: '7.0.x'
           
       - name: Restore
-        run: dotnet restore ./CommanderMinApi.sln
+        run: |
+          cd ${{ env.SOURCE_PATH }}
+          dotnet restore                
+      - name: Build and Publish
+        run: |
+          cd ${{ env.SOURCE_PATH }}         
+          dotnet build --configuration Release --no-restore
+          dotnet publish -c Release -o release
         
-      - name: Build
-        run: dotnet build ./CommanderMinApi.sln --configuration Release --no-restore
-        
-      - name: Publish
-        run: dotnet publish ./CommanderMinApi.sln --configuration Release --no-build
+      - name: Deployment
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
