@@ -33,6 +33,9 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
+// This class inherits the ICarterModule. Every class that uses this interface, will automatically be registered at 
+// startup. app.MapCarter() in program.cs
+//
 app.MapCarter();
 
 app.Run();
